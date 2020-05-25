@@ -1,0 +1,10 @@
+#!/bin/bash
+#------------------------------------------------------------------------
+# Copyright © Megan Hoover
+# 1/8/2020
+# PhD student at Clemson University
+# This script removes files. 
+# A quick way to remove all but the initial files for a VASP calculation
+#------------------------------------------------------------------------
+rm -f output REPORT IBZKPT CHG CHGCAR* CONTCAR* DOSCAR EIGENVAL OSZICAR* OUTCAR* PCDAT POSCAR_* PROCAR WAVECAR* XDATCAR EIGENVAL vasprun.xml
+
