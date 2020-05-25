@@ -1,0 +1,11 @@
+#!/bin/bash
+#------------------------------------------------------------------------------
+# Copyright © Megan Hoover
+# 1/8/2020
+# PhD student at Clemson University
+# This script changes the name of the initial files used for VASP calculations
+#------------------------------------------------------------------------------
+sed -i "2s/.*/SYSTEM = $1/" INCAR*
+sed -i "1s/.*/$1/" KPOINTS*
+sed -i "1s/.*/$1/" POSCAR
+#sed -i "2s/.*/#PBS -N $1/" vasp-*
