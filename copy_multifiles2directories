@@ -1,0 +1,10 @@
+#!/bin/csh -f
+#----------------------------------------
+# Copyright © Megan Hoover
+# 1/8/2020
+# PhD student at Clemson University
+# This script copies files into the various directories
+#----------------------------------------
+foreach i (4.9122  5.0201  5.1281  5.2361  5.2900  5.3440  5.3980  5.4520  5.5060  5.5599  5.6679  5.7759  5.8838)
+   cp INCAR KPOINTS POTCAR vasp.pbs  $i/.
+end
