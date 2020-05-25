@@ -1,0 +1,17 @@
+#!/bin/sh
+#----------------------------------------
+# Copyright © Megan Hoover
+# 1/8/2020
+# PhD student at Clemson University
+# Makes directories and subdirectories
+#----------------------------------------
+for Mech in Mech3; do
+    for Case in Case3; do
+        for Subcase in "5.503" "5.567" "7.828"; do
+            for element in Mg Ca Sr Ba; do
+                echo mkdir -p Task1_Uramping/${Mech}/${Case}/${Subcase}/${element}
+                mkdir -p Task1_Uramping/${Mech}/${Case}/${Subcase}/${element}
+            done
+        done
+    done
+done
