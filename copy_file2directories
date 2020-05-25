@@ -1,0 +1,10 @@
+#!/bin/csh -f
+#----------------------------------------
+# Copyright © Megan Hoover
+# 1/8/2020
+# PhD student at Clemson University
+# This script copies a file into the directories listed
+#----------------------------------------
+foreach i (R0  R10  R12  R14  R16  R18  R2   R21  R23  R4  R6  R8  R1  R11  R13  R15  R17  R19  R20  R22  R3   R5  R7  R9)
+   cp dpd.pbs $i/.
+end
