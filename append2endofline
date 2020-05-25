@@ -1,0 +1,53 @@
+#!/bin/sh
+#----------------------------------------
+# Copyright © Megan Hoover
+# 1/8/2020
+# PhD student at Clemson University
+# This script appends F or T 3xs, which is associated with the xyz position, at the end of each atom position in the POSCAR file.
+#----------------------------------------
+# NEED TO WRITE Generic Code to run this for all calculations:
+# cp POSCAR POSCAR_testscripttmp
+# write a line of code to read the total number of atoms in the POSCAR_orig file & assign the total number of atoms to some variable (i.e., varTNA)
+# LNend = $(awk 'END {print NR}' POSCAR
+# if varTNA equals LNend; do
+#   echo $(awk 'NR >= 9 && NR <= varTNA {print $0" F F F"}' POSCAR_testscripttmp >> POSCAR_testscript1)
+#   sed -e '9,'LNend'd' POSCAR_testscripttmp >> POSCAR_testscript2
+#   cat POSCAR_testscript2 POSCAR_testscript1 >> POSCAR_testscript
+#   rm POSCAR_testscript2 POSCAR_testscript1 POSCAR_testscripttmp
+#   sed -i -e '73s/F F F/T T T/' POSCAR_testscript
+#   sed -i -e '74s/F F F/T T T/' POSCAR_testscript
+#   sed -i -e '107s/F F F/T T T/' POSCAR_testscript
+#   sed -i -e '108s/F F F/T T T/' POSCAR_testscript
+#   sed -i -e '109s/F F F/T T T/' POSCAR_testscript
+#   sed -i -e '110s/F F F/T T T/' POSCAR_testscript
+#   mv POSCAR_testscript POSCAR
+# else if varTNE does not equal LNend; do
+#   echo $(awk 'NR >= 9 && NR <= varTNA {print $0" F F F"}' POSCAR_testscripttmp >> POSCAR_testscript1)
+#   sed -e '9,'LNend'd' POSCAR_testscripttmp >> POSCAR_testscript2
+#   sed -e '1,'varTNA'd' POSCAR_testscripttmp >> POSCAR_testscript3
+#   cat POSCAR_testscript2 POSCAR_testscript1 POSCAR_testscript3 >> POSCAR_testscript
+#   rm POSCAR_testscript3 POSCAR_testscript2 POSCAR_testscript1 POSCAR_testscripttmp
+#   sed -i -e '73s/F F F/T T T/' POSCAR_testscript
+#   sed -i -e '74s/F F F/T T T/' POSCAR_testscript
+#   sed -i -e '107s/F F F/T T T/' POSCAR_testscript
+#   sed -i -e '108s/F F F/T T T/' POSCAR_testscript
+#   sed -i -e '109s/F F F/T T T/' POSCAR_testscript
+#   sed -i -e '110s/F F F/T T T/' POSCAR_testscript
+#   mv POSCAR_testscript POSCAR
+# done
+#----------------------------------------
+
+# Code for this example
+cp POSCAR POSCAR_testscripttmp
+echo $(awk 'NR >= 9 && NR <=110 {print $0" F F F"}' POSCAR_testscripttmp >> POSCAR_testscript1)
+sed -e '9,213d' POSCAR_testscripttmp >> POSCAR_testscript2
+sed -e '1,110d' POSCAR_testscripttmp >> POSCAR_testscript3
+cat POSCAR_testscript2 POSCAR_testscript1 POSCAR_testscript3 >> POSCAR_testscript
+rm POSCAR_testscript3 POSCAR_testscript2 POSCAR_testscript1 POSCAR_testscripttmp
+sed -i -e '73s/F F F/T T T/' POSCAR_testscript
+sed -i -e '74s/F F F/T T T/' POSCAR_testscript
+sed -i -e '107s/F F F/T T T/' POSCAR_testscript
+sed -i -e '108s/F F F/T T T/' POSCAR_testscript
+sed -i -e '109s/F F F/T T T/' POSCAR_testscript
+sed -i -e '110s/F F F/T T T/' POSCAR_testscript
+mv POSCAR_testscript POSCAR
