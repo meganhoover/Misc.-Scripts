@@ -1,0 +1,35 @@
+#!/bin/bash
+#----------------------------------------
+# Copyright © Megan Hoover
+# 1/8/2020
+# PhD student at Clemson University
+# Taking a nondiagonal matrix in the POSCAR file (also called the basis vectors) and converting it to a diagonal matrix such that I can record the lattice parameters in Excel
+#----------------------------------------
+
+#For a system where a, b, and c do not equal & alpha, beta, gamma do not equal, such as the P1 space group (also called Triclinic)
+#a1 = a(x hat)
+#a2 = b*cos(gamma*(x hat)) + b*sin(gamma*(y hat))
+#a3 = cx*(x hat) + cy*(y hat) + cz*(z hat)
+#cx = c*cos(beta)
+#cy = c*[cos(gamma) - cos(beta)*cos(gamma)]/sin(gamma)
+#cz = sqrt(c^2 - cx^2 - cy^2)
+#Because alpha and beta are 90 degrees, the c-vector from the POSCAR file is the one recorded in Excel. No need to solve a3 from above.
+
+#Basis vectors from the POSCAR file (head -n7 POSCAR)
+  a=$(awk 'FNR == 3 {print $1}' POSCAR)
+  c=$(awk 'FNR == 5 {print $3}' POSCAR)
+  b1x=$(awk 'FNR == 4 {print $1}' POSCAR)
+  b1y=$(awk 'FNR == 4 {print $2}' POSCAR)
+#Defining Pi
+  pi=`echo "4*a(1)" | bc -l`
+#Gamma in radians
+  gamma=`echo "63.6685*($pi/180)" | bc -l`
+#Define constant that will be multiplied to b1x and b1y
+  b2x=`echo "c($gamma)" | bc -l`
+  b2y=`echo "s($gamma)" | bc -l`
+#Redefining b vector
+  b=`echo "(($b1x*$b2x - $b1y*$b2y) / ($b2x*$b2x - $b2y*$b2y))" | bc -l`
+#Assigning the new lattice parameter in array format
+  declare -a LCarray=("$a" "$b" "$c")
+#Copying the lattice parameter to LC.txt data file
+  echo "${LCarray[*]}" >> LC.txt
